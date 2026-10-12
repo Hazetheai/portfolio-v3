@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ['@nuxtjs/seo', '@nuxtjs/sitemap', '@nuxtjs/robots'],
+  modules: ['@nuxt/fonts', '@nuxtjs/seo', '@nuxtjs/sitemap', '@nuxtjs/robots'],
   site: {
     url: siteUrl,
     name: siteConfig.name,
@@ -34,7 +34,58 @@ export default defineNuxtConfig({
     indexable: siteUrl.startsWith('https://'),
   },
   ogImage: {
-    enabled: false,
+    enabled: true,
+    zeroRuntime: true,
+    defaults: {
+      width: 1200,
+      height: 630,
+      component: 'Site',
+    },
+  },
+  fonts: {
+    processCSSVariables: false,
+    experimental: {
+      disableLocalFallbacks: true,
+    },
+    providers: {
+      adobe: false,
+      bunny: false,
+      fontshare: false,
+      fontsource: false,
+      google: false,
+      googleicons: false,
+      npm: false,
+    },
+    defaults: {
+      preload: false,
+      styles: ['normal'],
+      subsets: ['latin'],
+      weights: [400, 600, 700],
+    },
+    families: [
+      {
+        name: 'Instrument Sans',
+        provider: 'local',
+        global: true,
+        display: 'block',
+        preload: false,
+        styles: ['normal'],
+        subsets: ['latin'],
+        weights: [400, 600, 700],
+      },
+    ],
+  },
+  schemaOrg: {
+    identity: {
+      type: 'Person',
+      name: siteConfig.name,
+      description: siteConfig.description,
+      sameAs: [siteConfig.github, siteConfig.linkedin],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: siteConfig.location,
+      },
+    },
   },
   linkChecker: {
     enabled: false,

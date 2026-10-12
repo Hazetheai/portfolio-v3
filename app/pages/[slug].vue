@@ -19,14 +19,10 @@ if (slug.value === 'home') {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-const title = computed(() => page.value ? `${page.value.name} — ${siteConfig.name}` : siteConfig.name)
-
-useSeoMeta({
-  title,
+usePageMeta({
+  title: () => page.value ? `${page.value.name} — ${siteConfig.name}` : siteConfig.name,
   description: () => page.value?.description || siteConfig.description,
-})
-useHead({
-  titleTemplate: '%s',
+  pageName: () => page.value?.name,
 })
 </script>
 

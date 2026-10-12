@@ -9,12 +9,9 @@ if (!home.value) {
   throw createError({ statusCode: 404, statusMessage: 'Home page is missing' })
 }
 
-useSeoMeta({
+usePageMeta({
   title: siteConfig.name,
   description: home.value.description || siteConfig.description,
-})
-useHead({
-  titleTemplate: '%s',
 })
 </script>
 
